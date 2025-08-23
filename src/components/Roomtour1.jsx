@@ -63,8 +63,8 @@ export default function RoomTourResponsive() {
                 {roomtour.map((room) => (
                     <div
                         key={room.id}
-                        id={`room-${room.id}`} // 👈 anchor ID for tooltip
-                        data-tooltip-content={`${room.label} - ${room.size}`} // 👈 tooltip text
+                        id={`room-${room.id}`} 
+                        data-tooltip-content={`${room.label} - ${room.size}`} 
                         className="absolute bg-yellow-400 rounded-full cursor-pointer"
                         style={{
                             top: `${room.top}%`,
