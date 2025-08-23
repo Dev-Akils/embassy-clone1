@@ -1,16 +1,23 @@
 import { useState } from "react";
 import flatImage from "../assets/arcadia.82c09093100814ef0c65.jpg";
 import { Link } from "react-router-dom";
+import { Tooltip } from "react-tooltip";
+import 'react-tooltip/dist/react-tooltip.css';
 
 const floors = [
-  { number: 1, label: "Floor 38", top: 25, height: 3 },
-//   { number: 2, label: "Floor 35", top: 30, height: 3 },
-  
+  { number: 38, label: "Floor 38", top: 25, height: 3 },
+  { number: 37, label: "Floor 37", top: 27, height: 3 },
+  { number: 36, label: "Floor 36", top: 29, height: 3 },
+  { number: 35, label: "Floor 35", top: 31, height: 3 },
+   { number: 34, label: "Floor 34", top: 33, height: 3 },
+  { number: 33, label: "Floor 33", top: 35, height: 3 },
+  { number: 32, label: "Floor 32", top: 37, height: 3 },
+  { number: 31, label: "Floor 31", top: 39, height: 3 },
 ];
 
 export default function FlatImage() {
   const [selectedFloor, setSelectedFloor] = useState(null);
-  const [hoveredFloor, setHoveredFloor] = useState(null); // track hovered floor
+  const [hoveredFloor, setHoveredFloor] = useState(null);
 
   const handleFloorClick = (floorNumber) => {
     console.log(`Floor ${floorNumber} clicked`);
@@ -29,28 +36,25 @@ export default function FlatImage() {
       {floors.map((floor) => (
         <div
           key={floor.number}
-          className={`absolute left-0 right-0 cursor-pointer ${
-            selectedFloor === floor.number ? "bg-blue-200/50" : ""
-          }`}
+          className={`absolute cursor-pointer transition-colors duration-200
+            ${selectedFloor === floor.number ? "bg-orange-300/50" : ""}
+            ${hoveredFloor === floor.number ? "bg-orange-300/50" : ""}
+          `}
           style={{
             top: `${floor.top}%`,
             height: `${floor.height}%`,
+            width: "20%",       // <-- short width
+            left: "45%",        // <-- center horizontally (50%-width/2)
           }}
           onClick={() => handleFloorClick(floor.number)}
           onMouseEnter={() => setHoveredFloor(floor.number)}
           onMouseLeave={() => setHoveredFloor(null)}
+          data-tooltip-id={`floor-tooltip-${floor.number}`}
+          data-tooltip-content={`Floor ${floor.number}`}
         >
-          {/* Show label only when this floor is hovered */}
-          {hoveredFloor === floor.number && (
-            <Link to="/roomtour">
-            <span className="absolute left-[60%] -translate-x-1/2 text-sm bg-orange-300 p-1 rounded shadow">
-              {floor.label}
-            </span></Link>
-          )}
+          <Tooltip id={`floor-tooltip-${floor.number}`} />
         </div>
       ))}
-
-     
     </div>
   );
 }
