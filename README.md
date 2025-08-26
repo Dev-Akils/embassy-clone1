@@ -7,7 +7,7 @@ Hover over hotspots on a floor plan to view room names and sizes.
 
 ##  Live Demo
 
-Check it out in action: **[Embassy Clone Live Demo](https://embassy-clone1-96o6.vercel.app/)**
+Check it out in action: **[Embassy Clone Live Demo](https://embassy-clone1-ijnq.vercel.app/)**
 
 ---
 
