@@ -80,52 +80,55 @@ export default function FlatsTour2() {
                 ))}
             </div>
 
-            <div className="relative w-full md:h-screen flex items-center justify-center">
-                {/* Floorplan Image */}
-                <img src={roomImage} alt="Floorplan" className="w-full h-auto" />
+
+{/* image */}
+<div className="relative w-full md:h-screen flex items-center justify-center">
+  <svg
+    viewBox="0 0 3000 2000"  // use your image’s natural dimensions
+    className="w-full h-auto "
+    preserveAspectRatio="xMidYMid meet"
+  >
+    {/* Background image inside SVG */}
+    <image href={roomImage} width="3000" height="2000" />
+
+    {/* All polygons in the same coordinate system */}
+    {units.map((unit) => (
+      <Link key={unit.id} to={`/roomtour2`}>
+        <Tooltip
+          title={`${unit.name} (${unit.type}, ${unit.size})`}
+          arrow
+          placement="top"
+          componentsProps={{
+            tooltip: {
+              sx: { bgcolor: "#ff7043", fontSize: "0.85rem", padding: "5px 8px" },
+            },
+          }}
+        >
+          <polygon
+          transform="translate(0, 155)"
+            points={unit.polygonPoints}   // no scaling needed!
+            fill={
+              selectedFloor === unit.id
+                ? "rgba(255,112,67,0.5)"   // selected
+                : hoveredFloor === unit.id
+                ? unit.hoverColor
+                : "transparent"
+            }
+            // stroke="orange"
+            strokeWidth={2}
+            style={{ cursor: "pointer" }}
+            onMouseEnter={() => setHoveredFloor(unit.id)}
+            onMouseLeave={() => setHoveredFloor(null)}
+            onClick={() => setSelectedFloor(unit.id)}
+          />
+        </Tooltip>
+      </Link>
+    ))}
+  </svg>
+</div>
 
 
-                {/* SVG overlay */}
-
-                {units.map((unit) => (
-                    <svg
-                        className={`absolute md:top-16 top-0 md:left-0 md:left-${unit.left} w-full h-full`}
-                        style={{ pointerEvents: "none" }}
-                    >
-                        <Link key={unit.id} to={`/roomtour2`}>
-                            <Tooltip
-                                key={unit.id}
-                                title={`${unit.name} (${unit.type}, ${unit.size})`}
-                                arrow
-                                placement="top"
-                                componentsProps={{
-                                    tooltip: {
-                                        sx: { bgcolor: "#ff7043", fontSize: "0.85rem", padding: "5px 8px" },
-                                    },
-                                }}
-                            >
-                                <polygon
-                                    points={scalePolygon(unit.polygonPoints, 0.34)}
-                                   
-                                    fill={
-                                        selectedFloor === unit.id
-                                            ? "rgba(255,112,67,0.5)"   // selected fill
-                                            : hoveredFloor === unit.id
-                                                ? unit.hoverColor          
-                                                : "transparent"
-                                    }
-
-                                    // stroke="orange"
-                                    strokeWidth={2}
-                                    style={{ cursor: "pointer", pointerEvents: "all" }}
-                                    onMouseEnter={() => setHoveredFloor(unit.id)}
-                                    onMouseLeave={() => setHoveredFloor(null)}
-                                    onClick={() => setSelectedFloor(unit.id)}
-                                />
-                            </Tooltip>
-                        </Link> </svg>))}
-
-            </div>
+           
 
             {/* Right Sidebar */}
             <div className="md:w-[20%] w-full  flex flex-col items-center justify-center border-r p-4">
