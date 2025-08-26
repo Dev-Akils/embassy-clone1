@@ -1,6 +1,7 @@
 
 
-import FlatImage from "./FlatImage";
+import Floors from "../floors/Floors";
+
 import NavbarLinks from "./NavbarLinks";
 
 const Flats = () => {
@@ -23,7 +24,7 @@ const Flats = () => {
 
                 {/* Image (center, span 2 cols) */}
                 <div className="md:col-span-2 h-full flex justify-center items-center">
-                    <FlatImage />
+                    <Floors />
 
                 </div>
 
