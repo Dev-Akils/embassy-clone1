@@ -89,7 +89,7 @@ export default function FlatsTour2() {
 
                 {units.map((unit) => (
                     <svg
-                        className={`absolute top-0 md:top-20 left-0 md:left-${unit.left} w-full h-full`}
+                        className={`absolute md:top-16 top-0 md:left-0 md:left-${unit.left} w-full h-full`}
                         style={{ pointerEvents: "none" }}
                     >
                         <Link key={unit.id} to={`/roomtour2`}>
