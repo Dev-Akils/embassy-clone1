@@ -38,7 +38,7 @@ Check it out in action: **[Embassy Clone Live Demo](https://embassy-clone1-96o6.
 
 ```bash
 git clone https://github.com/your-username/embassy-clone1.git
-cd embassy-clone
+cd embassy-clone1
 npm install
 npm start
 
